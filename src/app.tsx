@@ -3,7 +3,7 @@ import "./app.css";
 
 export const App = () => {
   return (
-    <div>
+    <>
       <a href="https://vite.dev" target="_blank">
         <img
           src="/vite.svg"
@@ -29,7 +29,7 @@ export const App = () => {
       <p class="read-the-docs">
         Click on the Vite logo or the VanJS logo to learn more
       </p>
-    </div>
+    </>
   );
 };
 
