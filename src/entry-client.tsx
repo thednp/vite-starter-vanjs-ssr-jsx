@@ -5,6 +5,7 @@ import App from "./app";
 const root = document.getElementById("app") as HTMLElement;
 
 van.hydrate(root, (dom) => {
-  dom.replaceChildren(<App /> as Element);
+  const children = <App />;
+  dom.replaceChildren(...(Array.isArray(children) ? children : [children]) as Element[]);  
   return dom;
 });

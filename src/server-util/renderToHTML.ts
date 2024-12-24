@@ -1,17 +1,10 @@
-import { type Element as VanElement } from "mini-van-plate/van-plate";
-// import van from "mini-van-plate/van-plate";
-// import { ChildDom } from "vanjs-core";
-type Source = number | string | VanElement | VanElement[] | Element | undefined;
+import type{ Element as VanElement, TagFunc } from "mini-van-plate/van-plate";
 
-// export const Fragment = (children: (Source | (() => Source))): VanElement => {
-//   return { render: () => renderToHTML(children)};
-// };
+type Source = number | string | VanElement | VanElement[] | TagFunc | undefined;
 
 export function renderToHTML(
   source: Source | (() => Source),
 ): string {
-  console.log('renderToHTML', typeof source, source);
-
   if (typeof source === "number") {
     return String(source);
   }
@@ -19,34 +12,13 @@ export function renderToHTML(
     return source.trim();
   }
   if (typeof source === "function") {
-    console.log('renderToHTML isFunction', { source });
-    // const wrapper = van.tags.div({}, source() as any);
-    // van.add(wrapper, source);
-    // console.log('renderToHTML.wrapper', wrapper);
-    // return renderToHTML(wrapper.children);
-    const result = source();
-    console.log('renderToHTML.result', typeof result, result);
-    return renderToHTML(result);
-    // return wrapper.children;
-    // return source();
+    return renderToHTML(source());
   }
   if (typeof source === "object" && "render" in source) {
-    console.log('renderToHTML isObject with .render()', source);
-
     return source.render();
   }
-  // if (typeof Element !== "undefined" && source instanceof Element) {
-  //   return source.outerHTML;
-  // }
-  
-  if (typeof source === 'object' && !Array.isArray(source)) {
-    console.log('renderToHTML isObject', source);
 
-    return renderToHTML(source);
-  }
   if (Array.isArray(source)) {
-    console.log('renderToHTML isArray', (source));
-
     const elements = [];
     for (const el of source) {
       elements.push(renderToHTML(el));
@@ -56,6 +28,6 @@ export function renderToHTML(
 
   // no source provided
   // @ts-ignore - this is server side code
-  console.warn("Vite Plugin VanJS: source not recognized:" + source);
+  console.warn("Render error: source not recognized: " + source);
   return "";
 }
