@@ -4,7 +4,7 @@ A fully working vite starter template for [VanJS](https://vanjs.org) forked from
 **Features**:
 * SSR server powered by express;
 * SSG prerender script included;
-* JSX transformation powered by [vite-plugin-vanjs](https://github.com/thednp/vite-plugin-vanjs);
+* JSX transformation powered by [vite-plugin-vanjs](https://github.com/thednp/vite-plugin-vanjs) with support for most important features such as Fragment, styles, attributes as State, strong types;
 * isomorphic render also powered by [vite-plugin-vanjs](https://github.com/thednp/vite-plugin-vanjs).
 
 
